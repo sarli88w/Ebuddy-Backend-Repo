@@ -4,9 +4,10 @@
   "description": "EBUDDY PTE. LTD. Technical Test",
   "main": "core/app.ts",
   "scripts": {
+    "build": "tsc",
     "start:dev": "ts-node-dev core/app.ts",
     "start:prod": "ts-node core/app.ts",
-    "build": "tsc"
+    "seed:run": "ts-node ./seeds/index.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
