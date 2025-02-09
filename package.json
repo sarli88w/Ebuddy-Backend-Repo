@@ -1,0 +1,17 @@
+{
+  "name": "backend-repo",
+  "version": "1.0.0",
+  "description": "EBUDDY PTE. LTD. Technical Test",
+  "main": "core/app.ts",
+  "scripts": {
+    "start:dev": "ts-node-dev core/app.ts",
+    "start:prod": "ts-node core/app.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
+  }
+}
