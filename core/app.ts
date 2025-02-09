@@ -1,15 +1,15 @@
 import { FirebaseConfig } from "../config";
 import { ApiClient } from "./apiClient";
+import { Routes } from "../routes";
 
 /**
  * Manual configuration firebase
  * ===============================
- * const firebase = new FirebaseConfig({
+ * new FirebaseConfig({
  *  projectId: 'ebuddy-test',
  *  clientEmail: 'ebuddy-test@gserviceaccount.com',
  *  privateKey: 'PRIVATE KEY',
- * });
- * firebase.init();
+ * }).init();
  * 
  * Instance configuration firebase
  * ===============================
@@ -17,4 +17,4 @@ import { ApiClient } from "./apiClient";
  */
 FirebaseConfig.instance.init();
 
-ApiClient.instance.init();
+new ApiClient({ routes: Routes }).init();
