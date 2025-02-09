@@ -1,9 +1,10 @@
 import { fetchUserData, updateUserData } from "../controller/api";
-import { authMiddleware } from "../middleware";
+import { getUserUpdateSchema } from "../controller/schema";
+import { authMiddleware, validateRequest } from "../middleware";
 
 export default (router: any) => {
-  router.get('/fetch-user-data', authMiddleware, fetchUserData);
-  router.post('/update-user-data', authMiddleware, updateUserData);
+  router.post('/fetch-user-data', authMiddleware, fetchUserData);
+  router.post('/update-user-data/:userId', [validateRequest(getUserUpdateSchema), authMiddleware], updateUserData);
 
   return router;
 }

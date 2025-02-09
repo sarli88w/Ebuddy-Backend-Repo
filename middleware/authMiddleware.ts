@@ -1,20 +1,21 @@
 import { FirebaseAdmin } from "../config";
 
 export const authMiddleware = async (req: any, res: any, next: any) => {
-  const token = req.headers.authorization?.split("Bearer ")[1];
-  if (!token) {
+  let idToken = req.headers['x-token-id'];
+  if (!idToken) {
     res.status(403).json({
       status: "error",
-      message: "Access to the requested resource is forbidden",
+      message: "Forbidden",
     });
     return;
   }
   
   try {
-    const decodedToken = await FirebaseAdmin.auth().verifyIdToken(token);
+    const decodedToken = await FirebaseAdmin.auth().verifyIdToken(idToken);
     req.user = decodedToken;
     next();
-  } catch (error) {
+  } catch (err: any) {
+    console.error('error', err?.message);
     res.status(401).json({ 
       status: "error",
       message: "Unauthorized",

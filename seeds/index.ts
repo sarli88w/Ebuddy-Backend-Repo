@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import firebaseAdmin from "firebase-admin";
+import { initialize } from "fireorm";
 import { seedUsers } from "./seedUsers";
 
 let config = {
@@ -24,7 +25,12 @@ if (fs.existsSync(pathServiceAccountKey)) {
   }
 }
 
-firebaseAdmin.initializeApp({ credential: firebaseAdmin.credential.cert(config) });
+if (!firebaseAdmin.apps.length) {
+  firebaseAdmin.initializeApp({ credential: firebaseAdmin.credential.cert(config) });
+}
+  
+const firestore = firebaseAdmin.firestore();
+initialize(firestore);
 
 (async () => {
   seedUsers(firebaseAdmin);

@@ -1,17 +1,26 @@
-import { User } from "../entities";
 import { userRepository } from "../repository";
 
 export const updateUserData = async (req: any, res: any) => {
-  try {
-    // const user = new User();
-    // user.name = req.body.name;
-    // user.email = req.body.email;
+  const { userId } = req.params;
+  const { name, email } = req.body;
 
-    // await userRepository.create(user);
+  try {
+    const user = await userRepository.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User not found",
+      });
+    }
+
+    user.name = name || user.name;
+    user.email = email || user.email;
+
+    await userRepository.update(user);
 
     res.status(200).json({
-      status: 'success',
-      message: "User data updated successfully",
+      status: "success",
+      data: user,
     });
   } catch (error: any) {
     res.status(500).json({
