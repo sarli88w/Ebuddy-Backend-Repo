@@ -9,7 +9,7 @@ import { Routes } from "../routes";
  * new FirebaseConfig({
  *  projectId: 'ebuddy-test',
  *  clientEmail: 'ebuddy-test@gserviceaccount.com',
- *  privateKey: 'PRIVATE KEY',
+ *  privateKey: '=== PRIVATE KEY ===',
  * }).init();
  * 
  * Instance configuration firebase
