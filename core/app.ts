@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { FirebaseConfig } from "../config";
 import { ApiClient } from "./apiClient";
 import { Routes } from "../routes";
@@ -17,4 +18,4 @@ import { Routes } from "../routes";
  */
 FirebaseConfig.instance.init();
 
-new ApiClient({ routes: Routes }).init();
+(new ApiClient({ routes: Routes })).init();

@@ -1,10 +1,13 @@
 import fs from "fs";
 import path from "path";
 import firebaseAdmin, { ServiceAccount } from "firebase-admin";
+import { initialize } from "fireorm";
+
+export const FirebaseAdmin = firebaseAdmin;
 
 export type FirebaseConfigCert = {
   [key: string]: any;
-}
+};
 
 export class FirebaseConfig {
   private static _instance: FirebaseConfig;
@@ -42,7 +45,8 @@ export class FirebaseConfig {
     }
 
     this.initAdmin(this.options).then(() => {
-      this.db = firebaseAdmin.firestore();
+      this.db = FirebaseAdmin.firestore();
+      initialize(this.db);
     });
 
     this.isReadyResolve();
@@ -55,8 +59,8 @@ export class FirebaseConfig {
   }
 
   public async initAdmin(serviceAccountPathOrObject: string | ServiceAccount) {
-    firebaseAdmin.initializeApp({
-      credential: firebaseAdmin.credential.cert(serviceAccountPathOrObject),
+    FirebaseAdmin.initializeApp({
+      credential: FirebaseAdmin.credential.cert(serviceAccountPathOrObject),
     });
   }
 }
