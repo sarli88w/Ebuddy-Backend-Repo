@@ -7,10 +7,11 @@ export const updateUserData = async (req: any, res: any) => {
   try {
     const user = await userRepository.findById(userId);
     if (!user) {
-      return res.status(404).json({
+      res.status(404).json({
         status: "error",
         message: "User not found",
       });
+      return;
     }
 
     user.name = name || user.name;

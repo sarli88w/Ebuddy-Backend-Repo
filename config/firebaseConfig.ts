@@ -5,10 +5,6 @@ import { initialize } from "fireorm";
 
 export const FirebaseAdmin = firebaseAdmin;
 
-export type FirebaseConfigCert = {
-  [key: string]: any;
-};
-
 export class FirebaseConfig {
   private static _instance: FirebaseConfig;
   public static get instance() {
@@ -23,7 +19,7 @@ export class FirebaseConfig {
     this.isReadyResolve = resolve;
   });
 
-  public options: FirebaseConfigCert;
+  public options: any;
   public db: any;
 
   constructor(overrideOptions?: any) {
@@ -31,6 +27,7 @@ export class FirebaseConfig {
       projectId: 'ebuddy-test',
       clientEmail: 'ebuddy-test@gserviceaccount.com',
       privateKey: '=== PRIVATE KEY ===',
+      apiKey: 'ebuddy-api-key',
     }, overrideOptions || {});
 
     const pathServiceAccountKey = path.join(__dirname, './serviceAccountKey.json');
@@ -41,6 +38,15 @@ export class FirebaseConfig {
         projectId: serviceAccountJsonData.project_id,
         clientEmail: serviceAccountJsonData.client_email,
         privateKey: serviceAccountJsonData.private_key,
+      })
+    }
+
+    const pathWebAppConfig = path.join(__dirname, './webAppConfig.json');
+    if (fs.existsSync(pathWebAppConfig)) {
+      const webAppConfigRawData = fs.readFileSync(pathWebAppConfig, "utf8");
+      const webAppConfigJsonData = JSON.parse(webAppConfigRawData);
+      this.options = Object.assign(this.options, {
+        apiKey: webAppConfigJsonData.apiKey,
       })
     }
 

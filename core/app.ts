@@ -10,6 +10,7 @@ import { Routes } from "../routes";
  *  projectId: 'ebuddy-test',
  *  clientEmail: 'ebuddy-test@gserviceaccount.com',
  *  privateKey: '=== PRIVATE KEY ===',
+ *  apiKey: 'ebuddy-api-key',
  * }).init();
  * 
  * Instance configuration firebase
