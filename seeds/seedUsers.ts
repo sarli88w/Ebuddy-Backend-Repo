@@ -8,6 +8,7 @@ const users = [
     username: "superadmin",
     name: "Super Admin",
     email: "superadmin@ebuddy.com",
+    email_verified: true,
     password: hashPassword("pass1234"),
     totalAverageWeightRatings: (Math.random() * 9 + 1).toFixed(2),
     numberOfRents: (Math.floor(Math.random() * 30) + 1),

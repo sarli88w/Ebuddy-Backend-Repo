@@ -1,9 +1,10 @@
-import { token } from "../controller/api";
+import { token, profile } from "../controller/api";
 import { getTokenSchema } from "../controller/schema";
-import { validateRequest } from "../middleware";
+import { authMiddleware, validateRequest } from "../middleware";
 
 export default (router: any) => {
   router.post('/token', validateRequest(getTokenSchema), token);
+  router.post('/profile', authMiddleware, profile);
 
   return router;
 }

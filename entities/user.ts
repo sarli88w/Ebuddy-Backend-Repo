@@ -6,6 +6,7 @@ export class User {
   username!: string;
   name!: string;
   email!: string;
+  email_verified?: boolean;
   password!: string;
   totalAverageWeightRatings?: number;
   numberOfRents?: number;
