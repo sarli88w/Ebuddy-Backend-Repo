@@ -1,4 +1,4 @@
-import { userRepository } from "../repository";
+import { userRepository, userSelectKeys } from "../repository";
 
 export const updateUserData = async (req: any, res: any) => {
   const { userId } = req.params;
@@ -33,11 +33,17 @@ export const updateUserData = async (req: any, res: any) => {
 
 export const fetchUserData = async (req: any, res: any) => {
   try {
-    const users = await userRepository.find();
+    const users = await userRepository
+      .orderByDescending('totalAverageWeightRatings')
+      .orderByDescending('numberOfRents')
+      .orderByDescending('recentlyActive')
+      .find();
+
+    const resData = userSelectKeys(users).filter(user => user.email != req.user.email);
 
     res.status(200).json({
       status: 'success',
-      data: users,
+      data: resData,
     });
   } catch (error: any) {
     res.status(500).json({

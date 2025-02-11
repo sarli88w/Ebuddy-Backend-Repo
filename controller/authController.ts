@@ -1,3 +1,4 @@
+import moment from "moment";
 import { FirebaseAdmin } from "../config";
 import { userRepository } from "../repository";
 import { getTokenType } from "./schema/authSchema";
@@ -17,6 +18,11 @@ export const token = async (req: any, res: any) => {
         message: 'Unauthorized',
       });
       return;
+    }
+    
+    if (user) {
+      user.recentlyActive = moment().valueOf();
+      await userRepository.update(user);
     }
     
     const token = await FirebaseAdmin.auth().createCustomToken(user?.id as string);

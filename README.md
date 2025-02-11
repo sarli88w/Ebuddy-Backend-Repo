@@ -18,3 +18,8 @@ https://console.developers.google.com/apis/api/firestore.googleapis.com/overview
 * Generate new private key
 * Rename file with serviceAccountKey.json
 * Upload to config/serviceAccountKey.json
+
+# Firestore Database
+```
+https://console.firebase.google.com/v1/r/project/<project_id>/firestore/indexes
+```
