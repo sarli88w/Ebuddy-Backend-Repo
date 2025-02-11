@@ -1,6 +1,6 @@
 import moment from "moment";
 import { FirebaseAdmin } from "../config";
-import { userRepository } from "../repository";
+import { userRepository, userSelectKey } from "../repository";
 import { getTokenType } from "./schema/authSchema";
 import { verifyPassword } from "../utils";
 
@@ -41,8 +41,15 @@ export const token = async (req: any, res: any) => {
 }
 
 export const profile = async (req: any, res: any) => {
+  const user = await userRepository.findById(req.user.uid);
+  const resData = userSelectKey(user);
+
   res.status(200).json({
     status: "success",
-    data: req.user,
+    data: {
+      ...resData,
+      auth_time: req.user.auth_time,
+      auth_exp: req.user.exp,
+    },
   });
 }

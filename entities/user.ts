@@ -18,7 +18,6 @@ export const UserPublicFields: string[] = [
   'username',
   'name',
   'email',
-  'password',
   'totalAverageWeightRatings',
   'numberOfRents',
   'recentlyActive',
