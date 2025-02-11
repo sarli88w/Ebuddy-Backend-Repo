@@ -24,10 +24,10 @@ export class FirebaseConfig {
 
   constructor(overrideOptions?: any) {
     this.options = Object.assign({
-      projectId: 'ebuddy-test',
-      clientEmail: 'ebuddy-test@gserviceaccount.com',
-      privateKey: '=== PRIVATE KEY ===',
-      apiKey: 'ebuddy-api-key',
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY,
+      apiKey: process.env.FIREBASE_API_KEY,
     }, overrideOptions || {});
 
     const pathServiceAccountKey = path.join(__dirname, './serviceAccountKey.json');
